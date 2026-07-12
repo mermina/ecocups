@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoCups — Áhrifareiknivél (sýnisverkefni úr verkasafni)</title>
+<meta name="description" content="EcoCups — sjálfbærir pappabollar fyrir íslensk fyrirtæki. Áhrifareiknivél fyrir úrgang og plast. Sýnisverkefni úr verkasafni Marinu Erminu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest:     #0b1f17;
+    --forest-mid: #132b1f;
+    --forest-deep:#060f0a;
+    --green:      #2B7A5A;
+    --green-light:#E3F0EA;
+    --green-mid:  #7FC9A6;
+    --green-dark: #1E5740;
+    --red:        #dc2626;
+    --amber:      #C8A96E;
+    --text:       #1A1A1A;
+    --text-muted: #555555;
+    --text-light: #8aaa92;
+    --border:     #C8DDD3;
+    --bg:         #ffffff;
+    --bg-soft:    #F2F7F4;
+    --bg-stone:   #E8F0EB;
+    --radius:     12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; color: var(--text); background: var(--bg); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── NAV ── */
+  nav { background: var(--forest); position: sticky; top: 0; z-index: 100; padding: 0 2rem; border-bottom: 1px solid rgba(43,122,90,0.1); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .nav-logo { color: #fff; font-weight: 600; font-size: 14px; letter-spacing: 0.05em; text-decoration: none; }
+  .nav-logo span { color: var(--green-mid); }
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; font-weight: 500; transition: color .2s; white-space: nowrap; }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a.back { color: rgba(255,255,255,0.3); }
+  .nav-links a.highlight { background: var(--green); color: #fff; padding: 6px 16px; border-radius: 6px; }
+  .nav-links a.highlight:hover { background: #236449; }
+
+  /* ── HERO ── */
+  .hero { background: var(--forest); padding: 72px 2rem 80px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(43,122,90,0.13) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(35,100,73,0.06) 0%, transparent 60%); pointer-events: none; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(43,122,90,0.14); border: 1px solid rgba(43,122,90,0.28); color: var(--green-mid); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 99px; margin-bottom: 20px; letter-spacing: 0.04em; }
+  .hero h1 { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(2.4rem, 5vw, 3.8rem); color: #fff; line-height: 1.15; margin-bottom: 14px; }
+  .hero h1 em { font-style: italic; color: var(--green-mid); }
+  .hero-sub { color: rgba(255,255,255,0.6); font-size: 1rem; max-width: 580px; margin: 0 auto 10px; line-height: 1.75; }
+  .hero-law { color: var(--green-mid); font-size: 0.9rem; font-weight: 500; margin: 0 auto 28px; max-width: 560px; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
+  .btn-primary { background: var(--green); color: #fff; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 15px; transition: background .2s, transform .15s; display: inline-block; }
+  .btn-primary:hover { background: #236449; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: #fff; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 15px; border: 1px solid rgba(255,255,255,0.22); transition: border-color .2s, transform .15s; display: inline-block; }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.55); transform: translateY(-1px); }
+  .cert-badges { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .cert-badge { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.55); font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 6px; display: flex; align-items: center; gap: 5px; }
+  .cert-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green-mid); flex-shrink: 0; }
+
+  /* ── SHARED ── */
+  .section { padding: 64px 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+  .section-heading { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.2; color: var(--text); margin-bottom: 16px; }
+  .section-body { color: var(--text-muted); font-size: 1rem; line-height: 1.75; max-width: 640px; }
+
+  /* ── CHAPTER DIVIDER ── */
+  .chapter-divider {
+    display: flex; align-items: center; gap: 0;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .chapter-divider-wrap { padding: 0 2rem; }
+  .chapter-divider-half {
+    flex: 1; padding: 20px 32px; text-align: center;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .chapter-divider-half.problem { background: #fee2e2; color: #991b1b; border-radius: var(--radius) 0 0 var(--radius); }
+  .chapter-divider-half.solution { background: var(--green-light); color: var(--green-dark); border-radius: 0 var(--radius) var(--radius) 0; }
+  .chapter-divider-arrow { background: #fff; border: 2px solid var(--border); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; z-index: 1; }
+
+  /* ── EXPANDABLE TILE GRID ── */
+  .tile-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 32px; }
+
+  .tile {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: #fff;
+    cursor: pointer;
+    transition: box-shadow .2s, transform .15s, border-color .2s;
+    overflow: hidden;
+    position: relative;
+  }
+  .tile:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .tile.open { box-shadow: 0 6px 28px rgba(0,0,0,0.1); }
+
+  /* Problem tiles */
+  .tile.problem-tile { border-top: 3px solid var(--red); }
+  .tile.problem-tile.amber { border-top-color: var(--amber); }
+  .tile.problem-tile.green-top { border-top-color: var(--green); }
+
+  /* Solution tiles */
+  .tile.solution-tile { border-top: 3px solid var(--green); }
+
+  .tile-face { padding: 22px 20px; }
+  .tile-icon { font-size: 22px; margin-bottom: 10px; }
+  .tile-stat {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; line-height: 1; margin-bottom: 6px;
+  }
+  .problem-tile .tile-stat { color: var(--red); }
+  .problem-tile.amber .tile-stat { color: var(--amber); }
+  .problem-tile.green-top .tile-stat { color: var(--green); }
+  .solution-tile .tile-stat { color: var(--green); }
+
+  .tile-headline { font-weight: 600; font-size: 14px; color: var(--text); line-height: 1.35; margin-bottom: 10px; }
+  .tile-more {
+    font-size: 12px; font-weight: 600; color: var(--text-light);
+    display: flex; align-items: center; gap: 5px; letter-spacing: 0.02em;
+  }
+  .problem-tile .tile-more { color: #ef4444; }
+  .problem-tile.amber .tile-more { color: var(--amber); }
+  .problem-tile.green-top .tile-more { color: var(--green); }
+  .solution-tile .tile-more { color: var(--green); }
+  .tile-more .tile-arrow { font-size: 14px; transition: transform .25s; display: inline-block; }
+  .tile.open .tile-arrow { transform: rotate(180deg); }
+
+  .tile-detail {
+    max-height: 0; overflow: hidden;
+    transition: max-height .45s cubic-bezier(0.4,0,0.2,1), opacity .35s ease;
+    opacity: 0;
+    border-top: 1px solid transparent;
+  }
+  .tile.open .tile-detail {
+    max-height: 1400px; opacity: 1;
+    border-top-color: var(--border);
+  }
+  .tile-detail-inner { padding: 16px 20px 20px; font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .tile-detail-inner strong { color: var(--text); }
+  .tile-detail-inner .law-refs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+  .tile-detail-inner .law-ref { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+  .tile-detail-inner .cert-list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .tile-detail-inner .cert-item { display: flex; flex-direction: column; gap: 3px; }
+  .tile-detail-inner .cert-name { font-weight: 600; font-size: 13px; color: var(--text); }
+  .tile-detail-inner .cert-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+  .tile-detail-inner .size-group { margin-bottom: 12px; }
+  .tile-detail-inner .size-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--green-dark); margin-bottom: 6px; }
+  .tile-detail-inner .size-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tile-detail-inner .size-pill { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 99px; background: var(--bg-stone); border: 1px solid var(--border); color: var(--text-muted); }
+  .tile-detail-inner .size-pill.hot { background: #fef3c7; border-color: #fde68a; color: #92400e; }
+
+  /* Use cases — compact strip */
+  .usecase-strip { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 2rem; }
+  .usecase-strip-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; text-align: center; }
+  .usecase-eyebrow { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--green); flex-shrink: 0; }
+  .usecase-line { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+  .usecase-line strong { color: var(--text); font-weight: 600; }
+
+  /* Solution — product intro */
+  .solution-intro {
+    background: var(--forest);
+    padding: 48px 2rem;
+    position: relative; overflow: hidden;
+  }
+  .solution-intro::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(43,122,90,0.07) 0%, transparent 70%); pointer-events: none; }
+  .solution-intro-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .solution-intro .section-label { color: var(--green-mid); }
+  .solution-intro h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); color: #fff; line-height: 1.2; margin-bottom: 16px; }
+  .solution-intro p { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.75; max-width: 700px; margin-bottom: 12px; }
+  .solution-intro p strong { color: var(--green-mid); }
+  .solution-intro .print-strip { display: flex; align-items: center; gap: 10px; background: rgba(43,122,90,0.08); border: 1px solid rgba(43,122,90,0.2); border-radius: 8px; padding: 12px 18px; margin-top: 8px; max-width: 600px; font-size: 13px; color: rgba(255,255,255,0.6); }
+  .solution-intro .print-strip strong { color: var(--green-mid); }
+
+  /* Solution tiles — dark background context */
+  .solution-tiles-section { background: var(--bg-stone); padding: 48px 2rem; }
+  .solution-tiles-section .section-body { color: var(--text-muted); margin-bottom: 0; }
+  .solution-tile { background: #fff; }
+
+  /* CO2 teaser inside solution tile */
+  .co2-teaser { background: var(--forest); border-radius: 8px; padding: 16px; margin-top: 10px; text-align: center; }
+  .co2-teaser-val { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--green-mid); display: block; line-height: 1; }
+  .co2-teaser-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+  /* ── CALCULATOR ── */
+  .calc-section { background: var(--bg-soft); }
+  .calc-section .section-heading { color: var(--text); }
+  .calc-wrap { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-top: 36px; box-shadow: 0 4px 24px rgba(11,31,23,0.08); }
+  .calc-top { display: grid; grid-template-columns: 1fr 1fr; }
+  .calc-inputs { padding: 32px; border-right: 1px solid var(--border); }
+  .calc-inputs h3 { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 24px; }
+  .slider-group { margin-bottom: 24px; }
+  .slider-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .slider-label span:first-child { font-size: 14px; color: var(--text); font-weight: 500; }
+  .slider-label .slider-val { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--green); }
+  input[type=range] { width: 100%; height: 4px; -webkit-appearance: none; background: var(--border); border-radius: 99px; outline: none; cursor: pointer; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--green); border: 3px solid #fff; box-shadow: 0 0 0 1px var(--green); cursor: pointer; transition: box-shadow .15s; }
+  input[type=range]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 4px rgba(43,122,90,0.2); }
+  .comparison-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+  .comparison-opts { display: flex; flex-direction: column; gap: 7px; }
+  .comp-opt { display: flex; align-items: center; gap: 10px; padding: 9px 13px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: all .15s; font-size: 13px; color: var(--text-muted); background: var(--bg-soft); user-select: none; }
+  .comp-opt:hover { border-color: var(--green); color: var(--text); }
+  .comp-opt.active { border-color: var(--green); background: var(--green-light); color: var(--green-dark); font-weight: 500; }
+  .comp-opt .radio { width: 15px; height: 15px; border-radius: 50%; border: 2px solid #bfd0c4; flex-shrink: 0; transition: all .15s; }
+  .comp-opt.active .radio { border-color: var(--green); background: var(--green); box-shadow: inset 0 0 0 3px #fff; }
+  .comp-opt .co2-badge { margin-left: auto; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 99px; background: #fee2e2; color: #991b1b; }
+  .comp-opt.active .co2-badge { background: rgba(43,122,90,0.15); color: var(--green-dark); }
+  .calc-result { padding: 32px; background: var(--forest); display: flex; flex-direction: column; justify-content: center; }
+  .result-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 8px; }
+  .result-saving { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); color: var(--green-mid); line-height: 1; margin-bottom: 6px; }
+  .result-saving-unit { font-size: 14px; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+  .result-pct { display: inline-block; background: rgba(43,122,90,0.18); color: var(--green-mid); font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 20px; }
+  .result-bars { margin-bottom: 20px; }
+  .r-bar-row { margin-bottom: 10px; }
+  .r-bar-info { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+  .r-bar-track { height: 7px; background: rgba(255,255,255,0.07); border-radius: 99px; overflow: hidden; }
+  .r-bar-fill { height: 100%; border-radius: 99px; transition: width .4s ease; }
+  .r-bar-fill.bad { background: #ef4444; }
+  .r-bar-fill.good { background: var(--green); }
+  .result-cups-note { font-size: 12px; color: rgba(255,255,255,0.28); padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.07); }
+  .equiv-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); }
+  .equiv-tile { padding: 20px 16px; border-right: 1px solid var(--border); text-align: center; }
+  .equiv-tile:last-child { border-right: none; }
+  .equiv-icon { font-size: 22px; margin-bottom: 6px; }
+  .equiv-val { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--text); display: block; line-height: 1.2; }
+  .equiv-desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+  .calc-cta { padding: 20px 32px; background: var(--green-light); display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--border); }
+  .calc-cta p { font-size: 14px; color: var(--green-dark); font-weight: 500; }
+  .calc-sources { margin-top: 14px; font-size: 11px; color: var(--text-light); line-height: 1.6; }
+
+  /* ── FAQ ── */
+  .faq-section { background: var(--bg); }
+  .faq-list { max-width: 760px; margin-top: 36px; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:first-child { border-top: 1px solid var(--border); }
+  .faq-q { font-weight: 500; font-size: 15px; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; user-select: none; }
+  .faq-q .faq-arrow { font-size: 18px; color: var(--text-muted); transition: transform .2s; flex-shrink: 0; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+  .faq-a { font-size: 14px; color: var(--text-muted); line-height: 1.7; padding-top: 10px; display: none; }
+  .faq-a strong { color: var(--text); }
+  .faq-item.open .faq-a { display: block; }
+  .faq-a .law-refs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .faq-a .law-ref { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+
+  /* ── QUOTE ── */
+  .quote-section { background: var(--forest); position: relative; overflow: hidden; }
+  .quote-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 100% 100%, rgba(43,122,90,0.07) 0%, transparent 60%); pointer-events: none; }
+  .quote-section .section-label { color: var(--green-mid); }
+  .quote-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 40px; align-items: start; position: relative; }
+  .quote-form { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius); padding: 32px; }
+  .form-note { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 20px; padding: 10px 14px; background: rgba(43,122,90,0.07); border-radius: 6px; border-left: 2px solid var(--green); }
+  .form-group { margin-bottom: 14px; }
+  .form-group label { display: block; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 5px; font-weight: 500; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; padding: 10px 14px; font-size: 14px; font-family: inherit; outline: none; transition: border-color .15s; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--green); }
+  .form-group select option { background: var(--forest-mid); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .btn-submit { width: 100%; background: var(--green); color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer; transition: background .15s; margin-top: 8px; }
+  .btn-submit:hover { background: #236449; }
+  .quote-trust { display: flex; flex-direction: column; gap: 16px; }
+  .trust-item { display: flex; gap: 14px; align-items: flex-start; }
+  .trust-icon { width: 40px; height: 40px; background: rgba(43,122,90,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .trust-title { font-weight: 600; color: #fff; font-size: 14px; margin-bottom: 2px; }
+  .trust-body { font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.5; }
+  .contact-card { margin-top: 16px; padding: 18px 20px; background: rgba(43,122,90,0.07); border: 1px solid rgba(43,122,90,0.18); border-radius: var(--radius); font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.65; }
+  .contact-card strong { color: var(--green-mid); display: block; margin-bottom: 4px; }
+  .contact-card a { color: var(--green-mid); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--forest-deep); padding: 36px 2rem; border-top: 1px solid rgba(43,122,90,0.08); }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .footer-brand { color: #fff; font-weight: 600; font-size: 14px; letter-spacing: 0.05em; }
+  .footer-brand span { color: var(--green-mid); }
+  .footer-details { font-size: 12px; color: rgba(255,255,255,0.28); line-height: 1.7; }
+  .footer-details a { color: rgba(255,255,255,0.35); text-decoration: none; }
+  .footer-copy { font-size: 11px; color: rgba(255,255,255,0.18); }
+
+  /* ── STICKY CTA (mobile only) ── */
+  .sticky-cta { display: none; }
+  @media (max-width: 768px) {
+    .sticky-cta { display: block; position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; padding: 12px 16px; background: var(--forest); border-top: 1px solid rgba(43,122,90,0.2); }
+    .sticky-cta a { display: block; text-align: center; background: var(--green); color: #fff; padding: 13px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; }
+    body { padding-bottom: 72px; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .tile-grid { grid-template-columns: 1fr 1fr; }
+    .calc-top, .quote-layout { grid-template-columns: 1fr; }
+    .calc-inputs { border-right: none; border-bottom: 1px solid var(--border); }
+    .equiv-grid { grid-template-columns: 1fr 1fr; }
+    .equiv-tile:nth-child(2) { border-right: none; }
+    .equiv-tile:nth-child(3) { border-top: 1px solid var(--border); }
+    .calc-cta { flex-direction: column; align-items: flex-start; }
+    .nav-links { display: none; }
+    .chapter-divider-half { padding: 16px 20px; font-size: 10px; }
+    /* Hero split → stacked on mobile */
+    .hero > div { grid-template-columns: 1fr !important; }
+    .hero > div > div:last-child { min-height: 280px !important; }
+    .hero > div > div:first-child { padding: 48px 1.25rem !important; }
+  }
+  @media (max-width: 600px) {
+    .section { padding: 48px 1.25rem; }
+    .hero { padding: 52px 1.25rem 60px; }
+    .solution-intro, .solution-tiles-section { padding: 40px 1.25rem; }
+  }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .hero h1 { animation: fadeUp .6s ease both; }
+  .hero-sub { animation: fadeUp .6s .1s ease both; }
+  .hero-law { animation: fadeUp .6s .16s ease both; }
+  .hero-btns { animation: fadeUp .6s .22s ease both; }
+  .cert-badges { animation: fadeUp .6s .3s ease both; }
+
+  /* ── CUP ANIMATION ── */
+  @keyframes cupFloat {
+    0%,100% { transform: translateY(0px); }
+    50%      { transform: translateY(-14px); }
+  }
+  #hero-right {
+    transform-style: preserve-3d;
+    transition: transform 0.35s ease-out;
+    will-change: transform;
+  }
+  #hero-cup-img {
+    animation: cupFloat 5s ease-in-out infinite;
+    transform-origin: center bottom;
+    will-change: transform;
+  }
+
+  /* ═══════════ SWITCH IMPACT CALCULATOR (merged from calculator.html) ═══════════ */
+  .calc { max-width: 920px; margin: 0 auto; }
+  .calc-label { font-size: 12px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.08em; }
+  .calc-title { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15; margin: 8px 0 6px; }
+  .calc-sub { font-size: 15px; color: var(--text-muted); max-width: 640px; }
+  .draft-tag { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 600; color: var(--amber); border: 1px solid var(--amber); border-radius: 99px; padding: 3px 10px; }
+
+  .calc-card { display: grid; grid-template-columns: 1fr 1fr; margin-top: 28px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg); box-shadow: 0 10px 40px rgba(11,31,23,0.06); }
+
+  /* ── INPUTS (left) ── */
+  .inputs { padding: 30px; border-right: 1px solid var(--border); }
+  .inputs h3 { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 22px; }
+  .field { margin-bottom: 22px; }
+  .field-label { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 10px; }
+  .field-value { font-weight: 600; color: var(--green-dark); }
+
+  .text-input { width: 100%; padding: 10px 12px; font-family: inherit; font-size: 14px; color: var(--text); background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px; outline: none; transition: border-color .15s; }
+  .text-input::placeholder { color: var(--text-light); }
+  .text-input:focus { border-color: var(--green); }
+
+  .segmented { display: flex; gap: 6px; flex-wrap: wrap; }
+  .seg-btn { flex: 1; min-width: 84px; padding: 10px 8px; font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text-muted); background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+  .seg-btn:hover { border-color: var(--green-mid); }
+  .seg-btn:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+  .seg-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+  .destination { display: flex; align-items: center; gap: 10px; margin-top: 6px; padding: 12px 14px; background: var(--bg-soft); border: 1px dashed var(--green-mid); border-radius: 8px; }
+  .destination .arrow { font-size: 18px; color: var(--green); }
+  .destination .dest-text { font-size: 13px; color: var(--text); }
+  .destination .dest-text strong { color: var(--green-dark); }
+
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 99px; background: var(--border); outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--green); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 4px rgba(11,31,23,0.25); }
+  input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--green); cursor: pointer; border: 3px solid #fff; }
+  .field-hint { font-size: 11px; color: var(--text-light); margin-top: 6px; }
+
+  /* ── RESULTS (right) ── */
+  .results { padding: 30px; background: var(--forest); color: #fff; display: flex; flex-direction: column; }
+  .results-label { font-size: 11px; font-weight: 600; color: var(--green-mid); text-transform: uppercase; letter-spacing: 0.08em; }
+  .hero-metric { margin-top: 16px; }
+  .metric-num { font-family: 'DM Serif Display', Georgia, serif; font-size: 2.2rem; line-height: 1.05; color: #fff; }
+  .metric-num span.unit { font-size: 1rem; color: var(--green-mid); font-family: 'DM Sans', sans-serif; font-weight: 500; }
+  .metric-desc { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; line-height: 1.45; }
+  .divider { height: 1px; background: rgba(255,255,255,0.1); margin: 20px 0; }
+  .note { font-size: 12.5px; line-height: 1.6; color: rgba(255,255,255,0.6); }
+  .note strong { color: var(--green-mid); font-weight: 600; }
+  .metric-sec { font-size: 15px; color: rgba(255,255,255,0.92); font-weight: 500; margin-bottom: 10px; }
+  .metric-sec #co2Saved { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.5rem; color: var(--green-mid); }
+  .sec-tag { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 1px 6px; margin-left: 4px; }
+  .circ-stat { font-size: 12.5px; line-height: 1.5; color: rgba(255,255,255,0.78); margin: 6px 0 12px; }
+  .circ-stat strong { color: var(--green-mid); font-size: 14px; }
+  .report-tag { font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.55); margin-top: 16px; }
+  .report-tag strong { color: var(--green-mid); font-weight: 600; }
+
+  /* ── PER-CUP IMPACT ROWS (front panel: PLASTIC / LANDFILL / CO2) ── */
+  .impact-row { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .impact-row:last-of-type { border-bottom: none; }
+  .impact-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+  .impact-cat { font-size: 1.15rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green-mid); }
+  .status-badge { font-size: 12px; font-weight: 600; padding: 5px 13px; border-radius: 99px; letter-spacing: 0.02em; background: rgba(239,68,68,0.16); color: #f5a3a3; border: 1px solid rgba(239,68,68,0.32); white-space: nowrap; }
+  .status-badge.free { background: rgba(43,122,90,0.22); color: var(--green-mid); border-color: rgba(127,201,166,0.45); }
+  /* Valence colouring: red = cost (plastic / landfill, non-zero), green = recovery win, muted = zero */
+  .impact-cat.is-bad { color: #f5a3a3; }
+  .metric-num.is-bad,  .metric-num.is-bad  .unit { color: #f5a3a3; }
+  .metric-num.is-good, .metric-num.is-good .unit { color: var(--green-mid); }
+  .metric-num.is-zero, .metric-num.is-zero .unit { color: rgba(255,255,255,0.4); }
+  .impact-sub { margin-top: 14px; }
+  .email-note { font-size: 12.5px; line-height: 1.5; color: var(--green-mid); margin-top: 10px; }
+  .panel-body h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--green-dark); margin: 16px 0 8px; }
+  .panel-body .cert-pills, .panel-body .sdg-pills { margin-bottom: 4px; }
+
+  .pdf-box { margin-top: 20px; padding: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; }
+  .pdf-box p { font-size: 12.5px; color: rgba(255,255,255,0.6); margin-bottom: 10px; line-height: 1.5; }
+  .pdf-box input { width: 100%; padding: 9px 12px; font-family: inherit; font-size: 13px; color: #fff; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 7px; outline: none; margin-bottom: 8px; }
+  .pdf-box input::placeholder { color: rgba(255,255,255,0.3); }
+  .pdf-box input:focus { border-color: var(--green-mid); }
+  /* Light-background variants — for the summary/reporting block moved into the white inputs column */
+  .report-tag.on-light { color: var(--text-muted); margin-top: 18px; }
+  .report-tag.on-light strong { color: var(--green-dark); }
+  .pdf-box.on-light { background: var(--bg-soft); border-color: var(--border); }
+  .pdf-box.on-light p { color: var(--text-muted); }
+  .pdf-box.on-light input { color: var(--text); background: #fff; border-color: var(--border); }
+  .pdf-box.on-light input::placeholder { color: var(--text-light); }
+  .pdf-box.on-light .email-note { color: var(--green-dark); }
+  .pdf-btn { width: 100%; background: var(--green); color: #fff; border: none; padding: 11px; border-radius: 7px; font-weight: 600; font-size: 14px; font-family: inherit; cursor: pointer; transition: background .15s; }
+  .pdf-btn:hover { background: #2f8a66; }
+
+  .cta { margin-top: 18px; }
+  .cta-btn { display: block; width: 100%; text-align: center; background: transparent; color: #fff; text-decoration: none; padding: 11px; border-radius: 8px; font-weight: 600; font-size: 14px; font-family: inherit; border: 1px solid rgba(255,255,255,0.25); cursor: pointer; transition: background .15s, border-color .15s; }
+  .cta-btn:hover { background: rgba(255,255,255,0.06); border-color: var(--green-mid); }
+
+  /* ── EXPANDERS ── */
+  .panel { margin-top: 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); overflow: hidden; }
+  .panel-q { width: 100%; text-align: left; background: none; border: none; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--text); padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .panel-q:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; }
+  .panel-arrow { transition: transform .25s; color: var(--text-muted); }
+  .panel.open .panel-arrow { transform: rotate(180deg); }
+  .panel-body { display: none; padding: 0 20px 20px; font-size: 12.5px; color: var(--text-muted); line-height: 1.7; }
+  .panel.open .panel-body { display: block; }
+  .panel-body ul { margin: 8px 0 8px 18px; }
+  .panel-body li { margin-bottom: 6px; }
+  .panel-body p { margin-bottom: 10px; }
+  .panel-body a { color: var(--green-dark); }
+  .scope-line { margin-top: 12px; padding: 10px 12px; background: var(--bg-soft); border-left: 2px solid var(--amber); border-radius: 4px; font-size: 12px; color: var(--text-muted); }
+  .esg-tag { display: inline-block; font-size: 10px; font-weight: 600; color: var(--green-dark); background: var(--bg-soft); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; margin-left: 8px; }
+
+  /* ── ESG / CSR green trigger (in the inputs column) + its detail below the card ── */
+  .esg-trigger { width: 100%; margin-top: 18px; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--green); color: #fff; border: none; padding: 12px 14px; border-radius: 8px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .15s; }
+  .esg-trigger:hover { background: #2f8a66; }
+  .esg-trigger:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 2px; }
+  .esg-trigger .panel-arrow { color: rgba(255,255,255,0.85); transition: transform .25s; }
+  .esg-trigger[aria-expanded="true"] .panel-arrow { transform: rotate(180deg); }
+
+  .esg-detail { border: none; background: none; margin-top: 0; overflow: visible; }
+  .esg-detail.open { border: 1px solid var(--border); background: var(--bg); border-radius: var(--radius); margin-top: 14px; }
+  .esg-detail.open .panel-body { padding: 22px 24px 24px; }
+
+  @media (max-width: 760px) {
+    .calc-card { grid-template-columns: 1fr; }
+    .inputs { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  /* ═══════════ SWITCH IMPACT SUMMARY (preview on screen + PDF on print) ═══════════ */
+  #summaryCard { display: none; }                 /* hidden until requested */
+  #summaryCard.show { display: block; }            /* revealed on screen */
+  .summary-wrap { max-width: 820px; margin: 24px auto 0; }
+  .summary-doc { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 16px 50px rgba(11,31,23,0.1); padding: 40px; }
+  .sum-toolbar { max-width: 820px; margin: 0 auto 12px; display: flex; gap: 10px; justify-content: flex-end; align-items: center; }
+  .sum-toolbar .hint { margin-right: auto; font-size: 12px; color: var(--text-muted); }
+  .btn-download { background: var(--green); color: #fff; border: none; padding: 9px 18px; border-radius: 7px; font-weight: 600; font-size: 13px; font-family: inherit; cursor: pointer; }
+  .btn-download:hover { background: #236449; }
+  .btn-ghost { background: none; border: 1px solid var(--border); color: var(--text-muted); padding: 9px 16px; border-radius: 7px; font-weight: 500; font-size: 13px; font-family: inherit; cursor: pointer; }
+  .btn-ghost:hover { border-color: var(--green-mid); color: var(--text); }
+  /* Quote CTA on the summary (screen only) — reuses the details already entered */
+  .sum-quote-wrap { max-width: 820px; margin: 14px auto 0; }
+  .sum-quote { background: var(--green-light); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-top: 10px; }
+  .sum-quote-context { font-size: 13px; color: var(--green-dark); line-height: 1.55; margin-bottom: 12px; }
+  .sum-quote-context strong { color: var(--text); }
+  .sum-quote input { width: 100%; padding: 10px 12px; font-size: 14px; font-family: inherit; color: var(--text); background: #fff; border: 1px solid var(--border); border-radius: 8px; outline: none; margin-bottom: 8px; }
+  .sum-quote input:focus { border-color: var(--green); }
+  .sum-quote-note { font-size: 12.5px; line-height: 1.5; margin-top: 8px; }
+
+  .sum-head { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--green); padding-bottom: 16px; }
+  .sum-brand { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--green-dark); }
+  .sum-title { font-family: 'DM Serif Display', Georgia, serif; font-size: 28px; line-height: 1.1; margin-top: 6px; color: var(--text); }
+  .sum-meta { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+  .sum-stamp { text-align: right; font-size: 11px; color: var(--text-light); line-height: 1.5; }
+
+  .sum-figs { display: flex; gap: 36px; margin: 26px 0; flex-wrap: wrap; }
+  .sum-fig .n { font-family: 'DM Serif Display', serif; font-size: 2.1rem; color: var(--green-dark); line-height: 1; }
+  .sum-fig .n .u { font-size: 1rem; color: var(--green); font-family: 'DM Sans', sans-serif; }
+  .sum-fig .l { font-size: 12px; color: var(--text-muted); max-width: 230px; margin-top: 6px; line-height: 1.45; }
+
+  .sum-grid { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 8px; }
+  .sum-block h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--green-dark); margin-bottom: 8px; }
+  .sum-block p { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
+  .cert-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cert-pill { font-size: 11px; font-weight: 500; color: var(--green-dark); background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; padding: 4px 9px; }
+  .sum-based { font-size: 12px; color: var(--text-muted); background: var(--bg-soft); border-radius: 8px; padding: 12px 14px; margin: 20px 0 0; }
+  .sum-based strong { color: var(--text); }
+  .sum-foot { margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 10.5px; color: var(--text-light); line-height: 1.55; }
+  .sum-foot strong { color: var(--text-muted); }
+  .sum-circ { margin: 6px 0 20px; padding: 12px 14px; background: var(--bg-soft); border-radius: 8px; font-size: 13px; color: var(--text); line-height: 1.5; }
+  .sum-circ strong { color: var(--green-dark); }
+  .sum-sdg { margin-top: 20px; }
+  .sum-sdg h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--green-dark); margin-bottom: 8px; }
+  .sdg-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sdg-pill { font-size: 11px; font-weight: 500; color: var(--text); background: #fff; border: 1px solid var(--green-mid); border-radius: 6px; padding: 4px 9px; }
+
+  /* ── PRINT: show only the impact summary, hide the rest of the landing page ── */
+  @media print {
+    body { background: #fff !important; }
+    body > *:not(#calculator) { display: none !important; }
+    #calculator { padding: 0 !important; background: #fff !important; }
+    #calculator .section-inner { max-width: none; }
+    .screen-only { display: none !important; }
+    .sum-toolbar { display: none !important; }
+    #summaryCard { display: block !important; }
+    .summary-wrap { max-width: none; margin: 0; }
+    .summary-doc { border: none; box-shadow: none; border-radius: 0; padding: 0; }
+  }
+
+</style>
+</head>
+<body>
+<div id="lang-switch" style="position:fixed;top:14px;right:14px;z-index:2147483647;font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:13px;font-weight:600;background:rgba(11,31,23,0.92);border-radius:99px;padding:4px 5px;box-shadow:0 2px 10px rgba(0,0,0,0.25);"><span style="color:#fff;padding:4px 11px;border-radius:99px;background:#2B7A5A;">IS</span><a href="calculator-en.html" style="color:rgba(255,255,255,0.7);text-decoration:none;padding:4px 11px;border-radius:99px;">EN</a></div>
+
+<!-- ═══ SWITCH IMPACT CALCULATOR (merged from calculator.html) ═══ -->
+<section class="section calc-section" id="calculator">
+  <div class="section-inner">
+<!-- ══════════ ON-SCREEN CALCULATOR ══════════ -->
+<div class="calc screen-only">
+
+  <div class="calc-label">✓ Áhrif af skiptunum</div>
+  <h1 class="calc-title">Að skipta yfir í EcoCups — sparnaður í úrgangi og plasti, í raunverulegum tölum.</h1>
+  <p class="calc-sub">Segðu okkur frá fyrirtækinu þínu og við sýnum hvað þú tækir úr úrgangsstraumnum — tölur sem þú getur deilt með teyminu þínu eða notað í sjálfbærni-, ESG- eða samfélagsábyrgðarskýrslu.</p>
+  <span class="draft-tag">MVP · dæmitölur, á eftir að ganga endanlega frá</span>
+
+  <div class="calc-card">
+
+    <!-- LEFT: inputs -->
+    <div class="inputs">
+      <h3>Fyrirtækið þitt</h3>
+
+      <div class="field">
+        <div class="field-label">Nafn fyrirtækis</div>
+        <input type="text" id="orgName" class="text-input" placeholder="t.d. Reykjavík Coffee Co." aria-label="Organisation name">
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span>Fjöldi starfsfólks í fyrirtækinu</span><span class="field-value" id="peopleVal">50</span></div>
+        <input type="range" id="people" min="2" max="1000" step="2" value="50" aria-label="Number of people in your organisation">
+        <div class="field-hint">Við áætlum ~2 bolla á mann á vinnudegi — stilltu dagafjöldann hér að neðan eftir þínu mynstri.</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><span>Opnir dagar á ári</span><span class="field-value" id="daysVal">230</span></div>
+        <input type="range" id="days" min="100" max="365" step="5" value="230" aria-label="Days open per year">
+        <div class="field-hint">Skrifstofa ≈ 230 · kaffihús ≈ 330 · árstíðabundið ≈ 150</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Hvað notarðu núna? <span style="font-weight:400;color:#888;">— við berum það saman við EcoCups</span></div>
+        <div class="segmented" id="cupType" role="group" aria-label="Current cup type">
+          <button class="seg-btn" type="button" data-cup="eco" style="border:1px solid #1F6E4C;color:#0F5A41;font-weight:600;">EcoCups<br>pappabolli</button>
+          <button class="seg-btn active" data-cup="lined">Plasthúðaður<br>pappabolli</button>
+          <button class="seg-btn" data-cup="plastic">Plastbolli</button>
+        </div>
+        <div class="field-hint" style="margin-top:6px;">👆 Veldu það sem þú notar núna. Flestir pappabollar eru plasthúðaðir (PE eða PLA) — ef þú ert í vafa, veldu plasthúðaðan pappabolla.</div>
+
+        <table class="cmp" style="width:100%;border-collapse:collapse;font-size:12px;margin-top:14px;">
+          <thead>
+            <tr style="border-bottom:1px solid #e3e3dd;">
+              <th style="text-align:left;padding:6px 4px;"></th>
+              <th style="padding:6px 3px;color:#0F5A41;font-weight:600;">EcoCups<br>pappabolli</th>
+              <th style="padding:6px 3px;color:#888;font-weight:500;">Plasthúðaður<br>pappabolli</th>
+              <th style="padding:6px 3px;color:#888;font-weight:500;">Plastbolli</th>
+            </tr>
+          </thead>
+          <tbody style="text-align:center;color:#444;">
+            <tr><td style="text-align:left;padding:6px 4px;">Plastlaust</td><td style="color:#1F6E4C;font-weight:700;">✓</td><td style="color:#C0392B;">✗</td><td style="color:#C0392B;">✗</td></tr>
+            <tr><td style="text-align:left;padding:6px 4px;">Endurvinnanlegt sem pappír</td><td style="color:#1F6E4C;font-weight:700;">✓</td><td style="color:#C0392B;">✗</td><td style="color:#C0392B;">✗</td></tr>
+            <tr><td style="text-align:left;padding:6px 4px;">Jarðgeranlegt</td><td style="color:#1F6E4C;font-weight:700;">✓</td><td style="color:#C0392B;">✗</td><td style="color:#C0392B;">✗</td></tr>
+            <tr><td style="text-align:left;padding:6px 4px;">Engin plastgjöld / merki</td><td style="color:#1F6E4C;font-weight:700;">✓</td><td style="color:#C0392B;">✗</td><td style="color:#C0392B;">✗</td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:10px;color:#999;margin-top:6px;line-height:1.5;">✓ já · ✗ nei · „Plasthúðaður pappír“ nær yfir bæði PE- og PLA-húðun (hvort tveggja telst plast samkvæmt reglum ESB; PLA jarðgerist aðeins með iðnaðarjarðgerð, sem er ekki til á Íslandi)</div>
+      </div>
+
+      <!-- Summary + reporting actions (moved here from the results panel) -->
+      <button class="pdf-btn" id="getPdf" style="margin-top:18px;">Samantekt um að skipta í EcoCups →</button>
+
+      <div class="report-tag on-light"><strong>Tilbúið fyrir skýrslugerð:</strong> GRI 306 · ESRS E5 (CSRD) · UN SDG targets 12.5 · 14.1 — þetta sýnir hvaða staðal hver tala <em>samsvarar</em> (leiðarvísir um samræmi, ekki vottað samræmi). Full vörpun í ESG / samfélagsábyrgðar-spjaldinu hér að neðan.</div>
+
+      <button class="esg-trigger" id="esgToggle" aria-expanded="false" aria-controls="esg">ESG / samfélagsábyrgðarskýrsla — af hverju skiptir það máli? <span class="panel-arrow">⌄</span></button>
+    </div>
+
+    <!-- RIGHT: results -->
+    <div class="results">
+      <div class="results-label">Á ári búa núverandi <span id="currentCupName">plasthúðaðir pappabollar</span> til:</div>
+
+      <!-- PLASTIC (qualitative — plastic-lined vs certified plastic-free) -->
+      <div class="impact-row">
+        <div class="impact-head">
+          <span class="impact-cat" id="plasticCat">Plast</span>
+          <span class="status-badge" id="plasticBadge">Plasthúðað</span>
+        </div>
+        <div class="metric-desc" id="plasticDesc">Plasthúð sem þú kemst ekki hjá með þessum bollum — EcoCups eru vottaðir plastlausir í staðinn.</div>
+      </div>
+
+      <!-- LANDFILL -->
+      <div class="impact-row">
+        <div class="impact-head">
+          <span class="impact-cat" id="landfillCat">Urðun</span>
+          <span class="metric-num" id="landfillCupsNum"><span id="cupsDiverted">—</span> <span class="unit">bollar</span></span>
+        </div>
+        <div class="metric-desc">bollar á leið í urðun/brennslu á þessu ári</div>
+        <div class="impact-sub">
+          <div class="metric-num" id="wasteKgNum">≈ <span id="wasteKg">—</span></div>
+          <div class="metric-desc">heildarmagn bollaefnis sem brennt eða urðað er á ári — eftir þyngd (ESG / GRI 306 úrgangseiningin)</div>
+        </div>
+      </div>
+
+      <!-- COMPOSTABLE & RECYCLABLE (capability, not Iceland outcome) -->
+      <div class="impact-row">
+        <div class="impact-head">
+          <span class="impact-cat">Jarðgeranlegt og endurvinnanlegt</span>
+          <span class="metric-num" id="recoverCupsNum"><span id="recoverPrefix" style="font-size:1rem;font-weight:500;"></span><span id="recoverCups">—</span> <span class="unit">bollar</span></span>
+        </div>
+        <div class="metric-desc" id="recoverNote">Sömu bollar — báðar leiðir virka.</div>
+      </div>
+
+      <!-- CO2 -->
+      <div class="impact-row">
+        <div class="impact-head">
+          <span class="impact-cat">CO₂</span>
+        </div>
+        <div class="metric-desc">Endurvinnsla pappabolla dregur úr kolefnisspori hans um u.þ.b. 54% (VTT/Huhtamaki). EcoCups eru endurvinnanlegir sem pappír — PE- og PLA-bollar ekki — svo aðeins EcoCups geta náð þeim sparnaði.</div>
+      </div>
+
+      <!-- Email delivery (on the dark results panel) — offset so its button lines up with the Summary button on the left -->
+      <div class="pdf-box" id="emailBox" style="margin-top:72px;">
+        <p>Viltu fá þessa samantekt senda sem PDF? Skráðu netfangið þitt og við sendum hana.</p>
+        <input type="email" id="email" placeholder="thu@fyrirtaekid.is" aria-label="Your email">
+        <button class="pdf-btn" id="emailPdf">Senda mér samantektina →</button>
+        <div class="email-note" id="emailNote" hidden></div>
+      </div>
+
+      <div class="cta">
+        <a href="#quote" class="cta-btn">Senda mér verðið →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ESG / CSR detail — revealed by the green button inside the calculator -->
+  <div class="panel esg-detail" id="esg">
+    <div class="panel-body">
+      <p><strong>ESG</strong> (umhverfi, félagsþættir, stjórnarhættir) og <strong>samfélagsábyrgð (CSR)</strong> í skýrslugerð er nú eðlilegur hluti af rekstri á Íslandi — vænst af samstarfsaðilum, viðskiptavinum, fjárfestum og í auknum mæli opinberum kaupendum. Rökin eru einföld: litlar, skjalfestar ákvarðanir leggjast saman, og bollarnir sem teymið þitt og viðskiptavinir nota daglega eru sýnilegur og auðveldur sigur sem þú getur bent á.</p>
+      <p>Á Íslandi sameinar <strong><a href="https://www.sjalfbaer.is/en-gb" target="_blank" rel="noopener">Festa — miðstöð um sjálfbærni</a></strong> nærri 200 fyrirtæki og stofnanir, allt frá stærstu fyrirtækjum landsins til lítilla fyrirtækja, Reykjavíkurborgar og háskóla, til að efla sjálfbærni og heimsmarkmið Sameinuðu þjóðanna. Festa rekur einnig ókeypis kolefnisverkfæri, <a href="https://climatepulse.is" target="_blank" rel="noopener">ClimatePulse</a>. Að skipta yfir í vottaða jarðgeranlega bolla er einmitt svona áþreifanlegt, skýrsluhæft skref sem fellur eðlilega inn í ESG- eða samfélagsábyrgðarsögu.</p>
+
+      <h4>Hvernig þetta samsvarar skýrslugerðinni þinni</h4>
+      <ul>
+        <li><strong>GRI 306 (Úrgangur):</strong> kg / tonn af úrgangi sem beint er frá förgun.</li>
+        <li><strong>ESRS E5 — auðlindanotkun og hringrásarhagkerfi (ESB CSRD):</strong> breytingin úr ~0% í 100% jarðgeranlegt og endurvinnanlegt.</li>
+        <li><strong>Kolefni (endurvinnanleiki):</strong> endurvinnsla dregur úr spori pappabolla um ~54% (VTT/Huhtamaki); EcoCups má endurvinna, PE/PLA ekki. Við birtum ekki Scope 3 CO₂-tölu fyrr en vottuð gögn frá birgi liggja fyrir.</li>
+      </ul>
+
+      <h4>Heimsmarkmið Sameinuðu þjóðanna</h4>
+      <div class="sdg-pills">
+        <span class="sdg-pill">HM 12.5 · Draga verulega úr myndun úrgangs</span>
+        <span class="sdg-pill">HM 14.1 · Draga úr plastmengun (í hafi)</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-light);margin-top:8px;line-height:1.5;">Leiðbeinandi samsvörun við tiltekin <em>undirmarkmið</em> heimsmarkmiðanna — ekki fullyrðing um mælt framlag. Við vörpum ekki á HM 13 (loftslag), þar sem við birtum enga kolefnistölu.</div>
+
+      <h4>Skjalfestir eiginleikar</h4>
+      <div class="cert-pills">
+        <span class="cert-pill">EN 13432 · iðnaðarjarðgeranlegt</span>
+        <span class="cert-pill">9P0066 · heimajarðgeranlegt</span>
+        <span class="cert-pill">Flustix ≥98% plastlaust (FPPC036)</span>
+        <span class="cert-pill">&gt;99% endurvinnanlegt sem pappír (PAP21)</span>
+        <span class="cert-pill">PFAS-laust (yfirlýsing birgis)</span>
+        <span class="cert-pill">Öruggt fyrir matvæli (BfR / FDA)</span>
+      </div>
+
+      <div class="scope-line">Heiti rammanna hér að ofan (GRI 306, ESRS E5 / CSRD) sýna hvaða staðal hver tala <strong>samsvarar</strong> — þau eru leiðarvísir til að aðstoða skýrsluteymið þitt, <strong>ekki fullyrðing um að EcoCups eða þessar áætlanir séu vottaðar eða endurskoðaðar</strong> samkvæmt þeim stöðlum. Tölur eru leiðbeinandi; staðfestu gagnvart þínum eigin skýrsluramma. ESG/samfélagsábyrgðar-samhengi: <a href="https://www.sjalfbaer.is/en-gb" target="_blank" rel="noopener">Festa – sjalfbaer.is</a> (context only — not a source of these figures).</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ SWITCH IMPACT SUMMARY (preview + PDF) ══════════ -->
+<div id="summaryCard">
+  <div class="sum-toolbar">
+    <span class="hint">Tilbúið til að líma inn í ESG / samfélagsábyrgðarskýrslu — afritaðu tölurnar, sæktu sem PDF, eða fáðu það sent í tölvupósti.</span>
+    <button class="btn-ghost" id="closeSummary">← Til baka í reiknivél</button>
+    <button class="btn-ghost" id="copyFigures">Afrita tölur</button>
+    <button class="btn-download" id="downloadPdf">Sækja PDF</button>
+  </div>
+
+  <!-- Quote CTA — the warm next step; reuses what was already entered (screen only, not in the PDF) -->
+  <div class="sum-quote-wrap screen-only">
+    <button class="pdf-btn" id="quoteFromSummary" style="width:100%;">Senda mér verðið →</button>
+    <div class="sum-quote" id="quotePanel" hidden>
+      <p class="sum-quote-context" id="quoteContext">—</p>
+      <input type="email" id="quoteEmail" placeholder="thu@fyrirtaekid.is" aria-label="Your email for the quote">
+      <button class="pdf-btn" id="sendQuote" style="width:100%;">Senda mér það →</button>
+      <div class="sum-quote-note" id="quoteNote" hidden></div>
+    </div>
+  </div>
+
+  <div class="summary-wrap">
+    <div class="summary-doc">
+      <div class="sum-head">
+        <div>
+          <div class="sum-brand">ECOCUPS</div>
+          <div class="sum-title">EcoCups — samantekt um áhrif skiptanna</div>
+          <div class="sum-meta" id="sumMeta">Unnið fyrir — · —</div>
+        </div>
+        <div class="sum-stamp">Vottaðir jarðgeranlegir<br>pappabollar</div>
+      </div>
+
+      <div class="sum-based" id="sumBased">Byggt á —</div>
+
+      <div class="sum-figs">
+        <div class="sum-fig"><div class="n" id="sumWaste">—</div><div class="l">af bollaefni haldið frá urðun/brennslu á ári — endurheimtanlegt við endurvinnslu (GRI 306)</div></div>
+        <div class="sum-fig"><div class="n">Plast-<span class="u">laust</span></div><div class="l">vottað ≥98% plastlaust (Flustix FPPC036) — kemur í stað plasthúðar í PE- og PLA-bollum</div></div>
+        <div class="sum-fig"><div class="n">100%</div><div class="l">jarðgeranlegt og endurvinnanlegt sem pappír — á móti ~0% fyrir plasthúðaða bolla (ESRS E5 hringrás)</div></div>
+      </div>
+
+      <div class="sum-block" style="margin-bottom:18px;">
+        <h4>Samræmi við reglur</h4>
+        <p>EcoCups nota vatnsbundna hindrunarhúð, óháð vottað af Flustix sem a.m.k. 98% plastlaust (FPPC036); framleiðandinn segir hindrunina gerða án nokkurs plasts og í samræmi við reglur ESB um einnota plast.</p>
+      </div>
+
+      <div class="sum-circ"><strong>100%</strong> af ~<span id="sumCups">—</span> bollum á ári verða jarðgeranlegir og endurvinnanlegir sem pappír — upp frá ~0% með plasthúðuðum bollum. <em>(Hringrás — ESRS E5.)</em></div>
+
+      <div class="sum-grid">
+        <div class="sum-block">
+          <h4>Vottanir og eiginleikar</h4>
+          <div class="cert-pills">
+            <span class="cert-pill">EN 13432 · iðnaðarjarðgeranlegt</span>
+            <span class="cert-pill">9P0066 · heimajarðgeranlegt</span>
+            <span class="cert-pill">Flustix ≥98% plastlaust (FPPC036)</span>
+            <span class="cert-pill">&gt;99% endurvinnanlegt sem pappír (PAP21)</span>
+            <span class="cert-pill">PFAS-laust (yfirlýsing birgis)</span>
+        <span class="cert-pill">Öruggt fyrir matvæli (BfR / FDA)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sum-sdg">
+        <h4>Samræmist undirmarkmiðum heimsmarkmiða SÞ (leiðbeinandi)</h4>
+        <div class="sdg-pills">
+          <span class="sdg-pill">HM 12.5 · Draga úr myndun úrgangs</span>
+          <span class="sdg-pill">HM 14.1 · Draga úr plastmengun (í hafi)</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-light);margin-top:10px;line-height:1.5;">Samsvarar <strong>GRI 306</strong> (Úrgangur) · <strong>ESRS E5</strong> / ESB CSRD (auðlindanotkun og hringrásarhagkerfi) — leiðarvísir sem sýnir hvar hver tala fellur inn í þessa staðla, ekki fullyrðing um vottað eða endurskoðað samræmi.</div>
+      </div>
+
+      <div class="sum-foot">
+        <strong>Hvernig þessar tölur eru reiknaðar:</strong> Bollar/ár = fjöldi fólks × ~2 bollar á vinnudegi × opnir dagar. Efni haldið frá urðun/brennslu = bollar/ár × ~6,9 g á bolla (8 oz bolli), sýnt í kg/tonnum (ESG/GRI úrgangseiningin); EcoCups teljast endurheimtir (jarðgeranlegir / endurvinnanlegir sem pappír), ekki urðaðir. Plast er sýnt sem staða, ekki þyngd: bæði PE- og PLA-húðaðir bollar bera plasthúð (PLA telst plast samkvæmt reglum ESB), en EcoCups eru vottaðir ≥98% plastlausir (Flustix FPPC036). Kolefni: endurvinnsla dregur úr spori pappabolla um ~54% (VTT/Huhtamaki) og EcoCups eru endurvinnanlegir en PE/PLA ekki — svo ávinningurinn er endurvinnanleiki; við birtum ekki eina CO₂-tölu, í bið eftir vottuðum gögnum frá birgi. Þessar tölur bera aðeins saman úrgang og lífslok efnis — ekki allan líftíma eða áhrif framleiðslu. Leiðbeinandi áætlanir, ekki vottað mat — nákvæmar tölur fyrir pöntunina þína eru staðfestar í verðtilboðinu. Skýringartölur til að styðja skýrslufrásögn; notaðu þín eigin magntöl fyrir staðfesta (CSRD/ESRS) upplýsingagjöf.<br>
+        EcoCups · Tölur: birt LCA fyrir bolla + DEFRA. ESG/samfélagsábyrgðar-samhengi: Festa (sjalfbaer.is).
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote CTA repeated at the bottom of the summary (screen only, not in the PDF) -->
+  <div class="sum-quote-wrap screen-only">
+    <button class="pdf-btn" id="quoteFromSummaryB" style="width:100%;">Senda mér verðið →</button>
+    <div class="sum-quote" id="quotePanelB" hidden>
+      <p class="sum-quote-context" id="quoteContextB">—</p>
+      <input type="email" id="quoteEmailB" placeholder="thu@fyrirtaekid.is" aria-label="Your email for the quote">
+      <button class="pdf-btn" id="sendQuoteB" style="width:100%;">Senda mér það →</button>
+      <div class="sum-quote-note" id="quoteNoteB" hidden></div>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+
+<script>
+  // ── SWITCH IMPACT CALCULATOR (merged from calculator.html) ──
+    const CUPS_PER_PERSON_PER_DAY = 2;   // rough coffee assumption (labelled in the UI)
+    const CUP_WEIGHT_G = 6.9;            // 8 oz EcoCups cup (manufacturer spec), used for material-by-weight
+  
+    // Plastic is qualitative now — a status badge per cup type, not a gram count.
+    const PLASTIC_STATUS = {
+      eco:     { badge: 'Plastlaust', free: true,  desc: 'Vottaðir plastlausir — engin plasthúð til að fjarlægja.' },
+      lined:   { badge: 'Plasthúðað', free: false, desc: "Plasthúð sem þú kemst ekki hjá með þessum bollum — EcoCups eru vottaðir plastlausir í staðinn." },
+      plastic: { badge: '100% plast',  free: false, desc: "Allur bollinn er úr plasti — EcoCups eru vottaðir plastlausir í staðinn." },
+    };
+
+    // End-of-life recovery — a capability claim (certified attributes), not an Iceland disposal outcome.
+    // Only EcoCups are recoverable; PE/PLA/plastic are not (PLA's industrial-only route doesn't exist in Iceland).
+    const RECOVERY = {
+      eco:     { recovered: true,  note: 'Sömu bollar — báðar leiðir virka: jarðgerð heima eða í garði (vottað 9P0066), eða endurvinnsla sem pappír (>99% pappír) þar sem safnað er.' },
+      lined:   { recovered: false, note: 'Plasthúðaðir bollar eru hvorki endurvinnanlegir sem pappír né jarðgeranlegir heima/í garði. PLA er aðeins iðnaðarjarðgeranlegt — og Ísland hefur enga iðnaðarjarðgerð; PE er hvorugt.' },
+      plastic: { recovered: false, note: 'Plastbollar eru hvorki jarðgeranlegir né endurvinnanlegir sem pappír.' },
+    };
+  
+    // NOTE: no CO₂ number is shown — carbon is a sourced qualitative statement in the UI
+    // (recycling −54%, VTT/Huhtamaki). The numeric Scope 3 calc lives in the internal Excel tool.
+    const CUP_NAME = { eco: "EcoCups", lined: "plasthúðaðir pappabollar", plastic: "plastbollar" };
+    // Fuller names for the summary "switching from …" line, spelling out the lining
+    const CUP_NAME_FULL = { eco: "EcoCups", lined: "plasthúðaðir pappabollar (PE eða PLA)", plastic: "plastbollar" };
+
+    let cup = 'lined';
+  
+    const orgName   = document.getElementById('orgName');
+    const people    = document.getElementById('people');
+    const days      = document.getElementById('days');
+    const peopleVal = document.getElementById('peopleVal');
+    const daysVal   = document.getElementById('daysVal');
+    const plasticBadge = document.getElementById('plasticBadge');
+    const plasticDesc  = document.getElementById('plasticDesc');
+    const recoverCups  = document.getElementById('recoverCups');
+    const recoverPrefix = document.getElementById('recoverPrefix');
+    const recoverNote  = document.getElementById('recoverNote');
+    const plasticCat      = document.getElementById('plasticCat');
+    const landfillCat     = document.getElementById('landfillCat');
+    const landfillCupsNum = document.getElementById('landfillCupsNum');
+    const wasteKgNum      = document.getElementById('wasteKgNum');
+    const recoverCupsNum  = document.getElementById('recoverCupsNum');
+    const cupsDiv   = document.getElementById('cupsDiverted');
+    const wasteKg   = document.getElementById('wasteKg');
+    const curCupName = document.getElementById('currentCupName');
+  
+    const fmt = n => n.toLocaleString('is-IS');
+    // Show waste in kg, or tonnes once it gets large (ESG reports use tonnes)
+    const fmtWeight = kg => kg >= 1000 ? (kg / 1000).toFixed(1) + ' tonn' : Math.round(kg) + ' kg';
+  
+    function update() {
+      const cupsPerYear = people.value * CUPS_PER_PERSON_PER_DAY * days.value;
+      const isEco = cup === 'eco';
+      // EcoCups are recovered (compostable / paper-recyclable), so nothing goes to landfill.
+      const landfillCups = isEco ? 0 : cupsPerYear;
+  
+      // Material kept out of landfill/incineration, by weight (ESG/GRI unit). EcoCups: recovered, not landfilled.
+      const wasteText = isEco ? '0 kg' : fmtWeight(cupsPerYear * CUP_WEIGHT_G / 1000);
+  
+      peopleVal.textContent = fmt(+people.value);
+      daysVal.textContent   = fmt(+days.value);
+      cupsDiv.textContent   = fmt(landfillCups);
+      wasteKg.textContent   = wasteText;
+      curCupName.textContent = CUP_NAME[cup];
+
+      // Plastic is qualitative — a status badge, not a gram count.
+      const ps = PLASTIC_STATUS[cup];
+      plasticBadge.textContent = ps.badge;
+      plasticBadge.classList.toggle('free', ps.free);
+      plasticDesc.textContent = ps.desc;
+
+      // Recoverable — full count for EcoCups (certified compostable + paper-recyclable), 0 otherwise.
+      const rec = RECOVERY[cup];
+      const recoverableCups = rec.recovered ? cupsPerYear : 0;
+      recoverCups.textContent = fmt(recoverableCups);
+      recoverPrefix.textContent = recoverableCups > 0 ? 'up to ' : '';
+      recoverNote.textContent = rec.note;
+
+      // Labels stay green. Red marks a loss: the current cup's landfill numbers, and the 0 compostable/recyclable
+      // for non-EcoCups. EcoCups numbers (incl. its 0 landfill) stay white.
+      landfillCupsNum.className = 'metric-num ' + (landfillCups > 0 ? 'is-bad' : '');
+      wasteKgNum.className      = 'metric-num ' + (isEco ? '' : 'is-bad');
+      recoverCupsNum.className  = 'metric-num ' + (recoverableCups > 0 ? '' : 'is-bad');
+
+      buildSummary(cupsPerYear, wasteText);
+    }
+  
+    // Fill the Switch Impact Summary with the live numbers
+    function buildSummary(cupsPerYear, wasteText) {
+      const today = new Date().toLocaleDateString('is-IS', { day: 'numeric', month: 'long', year: 'numeric' });
+      const org = orgName.value.trim() || 'fyrirtækið þitt';
+      document.getElementById('sumMeta').textContent = 'Unnið fyrir ' + org + ' · ' + today;
+      document.getElementById('sumWaste').textContent = wasteText;
+      document.getElementById('sumCups').textContent = fmt(cupsPerYear);
+      document.getElementById('sumBased').innerHTML =
+        '<strong>Byggt á:</strong> ' + fmt(+people.value) + ' manns · ~' + CUPS_PER_PERSON_PER_DAY +
+        ' bollar/mann/vinnudag · ' + fmt(+days.value) + ' dagar/ár · skipt úr ' + CUP_NAME_FULL[cup] + ' yfir í EcoCups.';
+    }
+  
+    // Inputs
+    orgName.addEventListener('input', update);
+    people.addEventListener('input', update);
+    days.addEventListener('input', update);
+    document.querySelectorAll('#cupType .seg-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#cupType .seg-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        cup = btn.dataset.cup;
+        update();
+      });
+    });
+  
+    // Expanders
+    function makeExpander(panelId, toggleId) {
+      const panel = document.getElementById(panelId);
+      document.getElementById(toggleId).addEventListener('click', function () {
+        const open = panel.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+    makeExpander('esg', 'esgToggle');
+  
+    /* Reveal the summary on screen. Email auto-send still needs Kamil's backend
+       (Supabase + email service); for now the user downloads/prints the PDF themselves. */
+    const screenUI = document.querySelector('.screen-only');
+    const summary  = document.getElementById('summaryCard');
+  
+    document.getElementById('getPdf').addEventListener('click', () => {
+      screenUI.style.display = 'none';
+      summary.classList.add('show');
+      window.scrollTo(0, 0);
+    });
+    document.getElementById('closeSummary').addEventListener('click', () => {
+      summary.classList.remove('show');
+      screenUI.style.display = '';
+    });
+    document.getElementById('downloadPdf').addEventListener('click', () => window.print());
+
+    /* Copy a ready-to-paste figures block for ESG / CSR reports */
+    document.getElementById('copyFigures').addEventListener('click', () => {
+      const btn = document.getElementById('copyFigures');
+      const org = orgName.value.trim() || 'fyrirtækið þitt';
+      const cupsPerYear = people.value * CUPS_PER_PERSON_PER_DAY * days.value;
+      const wasteText = fmtWeight(cupsPerYear * CUP_WEIGHT_G / 1000);
+      const block =
+`Áhrif af því að skipta í EcoCups — ${org}
+Byggt á ${fmt(+people.value)} manns · ~${CUPS_PER_PERSON_PER_DAY} bollar/mann/vinnudag · ${fmt(+days.value)} dagar/ár.
+• ${wasteText} af bollaefni haldið frá urðun/brennslu á ári (GRI 306).
+• ${fmt(cupsPerYear)} bollar/ár verða 100% jarðgeranlegir og endurvinnanlegir sem pappír — upp frá ~0% (ESRS E5).
+• Vottað ≥98% plastlaust (Flustix FPPC036) — kemur í stað plasthúðar.
+Leiðbeinandi áætlanir — EcoCups`;
+      navigator.clipboard.writeText(block).then(() => {
+        const prev = btn.textContent;
+        btn.textContent = 'Afritað ✓';
+        setTimeout(() => { btn.textContent = prev; }, 1800);
+      }).catch(() => { btn.textContent = 'Ýttu á ⌘/Ctrl+C'; });
+    });
+
+    /* Email me my summary — the actual send needs Kamil's backend (Supabase + email
+       service), so for now we confirm the address and open the summary to download. */
+    const emailInput = document.getElementById('email');
+    const emailNote  = document.getElementById('emailNote');
+    document.getElementById('emailPdf').addEventListener('click', () => {
+      const addr = emailInput.value.trim();
+      const valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(addr);
+      if (!valid) {
+        emailNote.hidden = false;
+        emailNote.style.color = '#f0a8a8';
+        emailNote.textContent = 'Sláðu inn gilt netfang.';
+        emailInput.focus();
+        return;
+      }
+      emailNote.hidden = false;
+      emailNote.style.color = '';
+      emailNote.textContent = 'Takk — við sendum samantektina þína á ' + addr +
+        '. (Verið er að setja upp tölvupóstsendingar; á meðan opnast samantektin hér að neðan til að sækja eða prenta.)';
+      screenUI.style.display = 'none';
+      summary.classList.add('show');
+      window.scrollTo(0, 0);
+    });
+
+    /* Request a quote from the summary — reuse everything already entered; only the email may need confirming */
+    function quoteContextText() {
+      const org = orgName.value.trim() || 'fyrirtækið þitt';
+      const cupsPerYear = people.value * CUPS_PER_PERSON_PER_DAY * days.value;
+      return "Við miðum verðið við það sem þú hefur þegar slegið inn — engin þörf á að endurskrifa: <strong>" + org +
+        "</strong> · ~" + fmt(cupsPerYear) + " bollar/ár · núna " + CUP_NAME[cup] + ". Staðfestu bara netfangið þitt og sendu.";
+    }
+    // Wire a quote block (trigger → pre-filled panel → stub send). Used for both the top and bottom CTAs.
+    function wireQuote(triggerId, panelId, contextId, emailId, sendId, noteId) {
+      const trigger = document.getElementById(triggerId);
+      if (!trigger) return;
+      trigger.addEventListener('click', () => {
+        document.getElementById(contextId).innerHTML = quoteContextText();
+        const qEmail = document.getElementById(emailId);
+        if (!qEmail.value) qEmail.value = emailInput.value.trim();   // carry over the email if they gave one
+        const panel = document.getElementById(panelId);
+        panel.hidden = false;
+        panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        qEmail.focus();
+      });
+      document.getElementById(sendId).addEventListener('click', () => {
+        const qEmail = document.getElementById(emailId);
+        const qNote  = document.getElementById(noteId);
+        const addr = qEmail.value.trim();
+        const valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(addr);
+        if (!valid) {
+          qNote.hidden = false; qNote.style.color = '#b91c1c';
+          qNote.textContent = 'Sláðu inn gilt netfang.';
+          qEmail.focus(); return;
+        }
+        const org = orgName.value.trim() || 'fyrirtækið þitt';
+        const cupsPerYear = people.value * CUPS_PER_PERSON_PER_DAY * days.value;
+        qNote.hidden = false; qNote.style.color = 'var(--green-dark)';
+        qNote.textContent = 'Takk! Við undirbúum verðið fyrir ' + org + ' (~' + fmt(cupsPerYear) +
+          ' bollar/ár, núna ' + CUP_NAME[cup] + ') og sendum það á ' + addr +
+          '. (Verið er að setja upp verðlagningu; í bili staðfestir þetta beiðnina þína.)';
+        qEmail.disabled = true;
+        document.getElementById(sendId).disabled = true;
+      });
+    }
+    wireQuote('quoteFromSummary',  'quotePanel',  'quoteContext',  'quoteEmail',  'sendQuote',  'quoteNote');
+    wireQuote('quoteFromSummaryB', 'quotePanelB', 'quoteContextB', 'quoteEmailB', 'sendQuoteB', 'quoteNoteB');
+
+    // First paint
+    update();
+</script>
+<a href="https://github.com/mermina/ecocups-portfolio" target="_blank" rel="noopener" id="pf-casestudy-banner" style="position:fixed;left:16px;bottom:16px;z-index:2147483647;max-width:330px;display:block;text-decoration:none;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:rgba(17,24,39,0.95);color:#fff;padding:11px 15px;border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,0.28);font-size:13px;line-height:1.45;">
+<strong>Sýnisverkefni úr verkasafni.</strong> Hugmyndasíða sem ég hannaði og smíðaði &mdash; síðari rannsókn mín leiddi í ljós að grænu fullyrðingarnar stóðust ekki, svo hún var aldrei birt. <span style="color:#7dd3fc;text-decoration:underline;white-space:nowrap;">Lesa söguna &#8599;</span>
+</a>
+</body>
+</html>
