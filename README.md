@@ -6,7 +6,7 @@
 
 A concept B2B website and interactive **impact calculator** for a compostable paper-cup line aimed at the Icelandic market — cafés, offices, event organisers, and institutions looking to move away from plastic-lined cups. I designed and built the whole thing: the page structure, the copy, the visual design and animation, and a calculator that lets a business estimate the impact of switching cups.
 
-**Live:** the full animated site (`index.html`) and a standalone version of the **impact calculator** (`calculator.html`) — a focused interactive tool that estimates the impact of switching cups. _(GitHub Pages links added here once live.)_
+**Live:** [the full animated site](https://mermina.github.io/ecocups/) and [the standalone impact calculator](https://mermina.github.io/ecocups/calculator.html) — a focused interactive tool that estimates the impact of switching cups. Both are in Icelandic, with English versions: [site](https://mermina.github.io/ecocups/index-en.html) · [calculator](https://mermina.github.io/ecocups/calculator-en.html).
 
 ## The honest twist — why it was never deployed
 
