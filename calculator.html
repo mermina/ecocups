@@ -454,7 +454,7 @@
   }
 
   /* ═══════════ SWITCH IMPACT SUMMARY (preview on screen + PDF on print) ═══════════ */
-  #summaryCard { display: none; }                 /* hidden until requested */
+  #summaryCard { display: none; scroll-margin-top: 68px; }                 /* hidden until requested */
   #summaryCard.show { display: block; }            /* revealed on screen */
   .summary-wrap { max-width: 820px; margin: 24px auto 0; }
   .summary-doc { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 16px 50px rgba(11,31,23,0.1); padding: 40px; }
@@ -899,15 +899,26 @@
        (Supabase + email service); for now the user downloads/prints the PDF themselves. */
     const screenUI = document.querySelector('.screen-only');
     const summary  = document.getElementById('summaryCard');
+    let calcScrollY = 0;   // remember the calculator scroll position, to return to it
+    function showSummaryTop() {
+      // land on the summary itself (just below the sticky nav), not the page top
+      const nav = document.querySelector('nav');
+      const navH = nav ? nav.offsetHeight : 56;
+      const top = summary.getBoundingClientRect().top + window.scrollY - navH - 12;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+    }
   
     document.getElementById('getPdf').addEventListener('click', () => {
+      calcScrollY = window.scrollY;
       screenUI.style.display = 'none';
       summary.classList.add('show');
-      window.scrollTo(0, 0);
+      showSummaryTop();
     });
     document.getElementById('closeSummary').addEventListener('click', () => {
       summary.classList.remove('show');
       screenUI.style.display = '';
+      void screenUI.offsetHeight;   // force the calculator layout back so the page is tall again
+      window.scrollTo({ top: calcScrollY, behavior: 'instant' });
     });
     document.getElementById('downloadPdf').addEventListener('click', () => window.print());
 
@@ -949,9 +960,10 @@ Leiðbeinandi áætlanir — EcoCups`;
       emailNote.style.color = '';
       emailNote.textContent = 'Takk — við sendum samantektina þína á ' + addr +
         '. (Verið er að setja upp tölvupóstsendingar; á meðan opnast samantektin hér að neðan til að sækja eða prenta.)';
+      calcScrollY = window.scrollY;
       screenUI.style.display = 'none';
       summary.classList.add('show');
-      window.scrollTo(0, 0);
+      showSummaryTop();
     });
 
     /* Request a quote from the summary — reuse everything already entered; only the email may need confirming */
@@ -1000,7 +1012,7 @@ Leiðbeinandi áætlanir — EcoCups`;
     // First paint
     update();
 </script>
-<a href="https://github.com/mermina/ecocups-portfolio" target="_blank" rel="noopener" id="pf-casestudy-banner" style="position:fixed;left:16px;bottom:16px;z-index:2147483647;max-width:330px;display:block;text-decoration:none;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:rgba(17,24,39,0.95);color:#fff;padding:11px 15px;border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,0.28);font-size:13px;line-height:1.45;">
+<a href="https://github.com/mermina/ecocups" target="_blank" rel="noopener" id="pf-casestudy-banner" style="position:fixed;left:16px;bottom:16px;z-index:2147483647;max-width:330px;display:block;text-decoration:none;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:rgba(17,24,39,0.95);color:#fff;padding:11px 15px;border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,0.28);font-size:13px;line-height:1.45;">
 <strong>Sýnisverkefni úr verkasafni.</strong> Hugmyndasíða sem ég hannaði og smíðaði &mdash; síðari rannsókn mín leiddi í ljós að grænu fullyrðingarnar stóðust ekki, svo hún var aldrei birt. <span style="color:#7dd3fc;text-decoration:underline;white-space:nowrap;">Lesa söguna &#8599;</span>
 </a>
 </body>
