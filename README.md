@@ -24,7 +24,7 @@ Because of that, the site was **never published** as a live commercial page. Cat
 
 It shows three things I do, together:
 
-1. **Design & build** — a complete, animated, responsive website coded by hand.
+1. **Design & build** — a complete, animated, responsive website, built with AI assistance.
 2. **Sustainability copywriting** — warm, clear, benefit-led copy for a B2B audience, without greenwashing.
 3. **Green-claims due diligence** — reading the certifications and regulations closely enough to catch claims that don't stand up. This is the skill I'm building my work around.
 
@@ -37,7 +37,7 @@ It shows three things I do, together:
 
 ## Built with
 
-Hand-coded **HTML, CSS and JavaScript** — no site builder. Scroll-based animation, a fully interactive impact calculator (embedded in the site and available standalone), self-contained files with embedded assets, and web fonts from Google Fonts.
+**HTML, CSS and JavaScript**, written with AI assistance — no site builder, no template. Scroll-based animation, a fully interactive impact calculator (embedded in the site and available standalone), self-contained files with embedded assets, and web fonts from Google Fonts.
 
 ## About me
 
